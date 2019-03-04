@@ -46,6 +46,7 @@ RUN apt-get -y update && \
 
 RUN echo "deb http://cz.archive.ubuntu.com/ubuntu xenial main multiverse" >> /etc/apt/sources.list
 RUN apt-get -y update
+RUN apt-get -y install snmp
 RUN apt-get -y install snmp-mib-downloader
 
 
