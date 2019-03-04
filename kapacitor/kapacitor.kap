@@ -4,7 +4,4 @@
   "name": "My Kapacitor",
   "url": "http://localhost:9092",
   "active": true,
-  "organization": "example_org"
 }
-
-save as kapacitor.kap

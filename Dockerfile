@@ -111,14 +111,15 @@ COPY kapacitor/snmp_devicehealth.tick /etc/kapacitor/snmp_devicehealth.tick
 COPY kapacitor/snmp_throughput.tick /etc/kapacitor/snmp_throughput.tick
 COPY kapacitor/snmp_upload.tick /etc/kapacitor/snmp_upload.tick
 COPY kapacitor/snmp_download.tick /etc/kapacitor/snmp_download.tick
-COPY kapacitor/tick.sh /tmp/tick.sh
-RUN chmod +x /tmp/tick.sh
-RUN /tmp/tick.sh
-
-
+COPY influxdb/influxdb.src /usr/share/chronograf/canned/influxdb.src
+COPY kapacitor/kapacitor.kap /usr/share/chronograf/canned/kapacitor.kap
 
 # Cleanup
 RUN apt-get clean && \
  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD ["/usr/bin/supervisord"]
+
+COPY kapacitor/tick.sh /tmp/tick.sh
+RUN chmod +x /tmp/tick.sh
+RUN /tmp/tick.sh
