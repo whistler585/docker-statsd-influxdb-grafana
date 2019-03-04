@@ -1,0 +1,15 @@
+var period = 2m
+
+var every = 10s
+
+// Dataframe
+var oct_in = batch
+    |query('''SELECT difference(last("ifHCInOctets")) + difference(last("ifHCOutOctets")) as "total_bandwidth" FROM "telegraf"."autogen"."interface" WHERE time > now() - 2m GROUP BY time(5s) fill(none)''')
+        .period(period)
+        .every(every)
+        .groupBy(time(5s),'ifName', 'agent_host')
+    |influxDBOut()
+        .database('telegraf')
+        .retentionPolicy('autogen')
+        .measurement('throughput')
+        .precision('s')
