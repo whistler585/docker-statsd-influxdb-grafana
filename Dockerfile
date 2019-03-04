@@ -94,6 +94,14 @@ ADD grafana/provisioning /etc/grafana/provisioning
 ADD grafana/dashboards /var/lib/grafana/dashboards
 COPY grafana/grafana.ini /etc/grafana/grafana.ini
 
+
+
+# Cleanup
+RUN apt-get clean && \
+ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+CMD ["/usr/bin/supervisord"]
+
 ### Install SNMP v2
 FROM telegraf
 
@@ -112,9 +120,3 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get -y install snmp snmpd snmp-mibs-downloader && \
     rm -r /var/lib/apt/lists/*
-
-# Cleanup
-RUN apt-get clean && \
- rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-CMD ["/usr/bin/supervisord"]
