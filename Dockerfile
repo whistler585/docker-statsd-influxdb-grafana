@@ -93,11 +93,18 @@ RUN wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${G
 ADD grafana/provisioning /etc/grafana/provisioning
 ADD grafana/dashboards /var/lib/grafana/dashboards
 COPY grafana/grafana.ini /etc/grafana/grafana.ini
+RUN grafana-cli plugins install michaeldmoore-multistat-panel
 
-# Copy SNMP install script
+
+# Install SNMP install script
 COPY telegraf/snmp.sh /tmp/snmp.sh
 RUN chmod +x /tmp/snmp.sh
 RUN /tmp/snmp.sh
+
+# Install Kapacitor
+COPY influxdb/kapacitor.sh /tmp/kapacitor.sh
+RUN chomod +x /tmp/kapacitor.sh
+RUN /tmp/kapacitor.sh
 COPY influxdb/kapacitor.conf /etc/kapacitor/kapacitor.conf
 
 # Cleanup
