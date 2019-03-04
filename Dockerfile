@@ -103,13 +103,14 @@ RUN /tmp/snmp.sh
 
 # Install Kapacitor
 COPY kapacitor/kapacitor.sh /tmp/kapacitor.sh
+RUN chmod +x /tmp/kapacitor.sh
+RUN /tmp/kapacitor.sh
 COPY kapacitor/kapacitor.conf /etc/kapacitor/kapacitor.conf
 COPY kapacitor/snmp_devicehealth.tick /etc/kapacitor/snmp_devicehealth.tick
 COPY kapacitor/snmp_throughput.tick /etc/kapacitor/snmp_throughput.tick
 COPY kapacitor/snmp_upload.tick /etc/kapacitor/snmp_upload.tick
 COPY kapacitor/snmp_download.tick /etc/kapacitor/snmp_download.tick
-RUN chmod +x /tmp/kapacitor.sh
-RUN /tmp/kapacitor.sh
+
 
 
 # Cleanup
