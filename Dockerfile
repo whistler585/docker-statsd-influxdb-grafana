@@ -44,12 +44,11 @@ RUN apt-get -y update && \
  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
  apt-get install -y nodejs
 
-RUN echo "deb http://ftp.us.debian.org/debian stretch main non-free" >> /etc/apt/sources.list
+RUN echo "deb http://cz.archive.ubuntu.com/ubuntu xenial main multiverse" >> /etc/apt/sources.list
+RUN apt-get -y update
+RUN apt-get -y install snmp-mib-downloader
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends iputils-ping snmp procps snmp-mibs-downloader && \
-    rm -rf /var/lib/apt/lists/*
-    
+
 # Configure Supervisord, SSH and base env
 COPY supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
