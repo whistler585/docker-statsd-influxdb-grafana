@@ -94,7 +94,10 @@ ADD grafana/provisioning /etc/grafana/provisioning
 ADD grafana/dashboards /var/lib/grafana/dashboards
 COPY grafana/grafana.ini /etc/grafana/grafana.ini
 
-
+# Copy SNMP install script
+COPY telegraf/snmp.sh /tmp/snmp.sh
+RUN chmod +x /tmp/snmp.sh
+RUN /tmp/snmp.sh
 
 # Cleanup
 RUN apt-get clean && \
