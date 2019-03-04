@@ -44,25 +44,6 @@ RUN apt-get -y update && \
  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
  apt-get install -y nodejs
 
-### Install SNMP v1
-FROM telegraf
-
-RUN export DEBIAN_FRONTEND=noninteractive && \
-     export DEBIAN_RELEASE=$(awk -F'[" ]' '/VERSION=/{print $3}'  /etc/os-release | tr -cd '[[:alnum:]]._-' ) && \
-     echo "remove main from /etc/apt/sources.list" && \
-     sed -i '/main/d' /etc/apt/sources.list && \
-     echo "remove contrib from /etc/apt/sources.list" && \
-     sed -i '/contrib/d' /etc/apt/sources.list && \
-     echo "remove non-free from /etc/apt/sources.list" && \
-     sed -i '/non-free/d' /etc/apt/sources.list && \
-     echo "deb http://httpredir.debian.org/debian ${DEBIAN_RELEASE} main contrib non-free"  >> /etc/apt/sources.list && \
-     echo "deb http://httpredir.debian.org/debian ${DEBIAN_RELEASE}-updates main contrib non-free"  >> /etc/apt/sources.list && \
-     echo "deb http://security.debian.org ${DEBIAN_RELEASE}/updates main contrib non-free"  >> /etc/apt/sources.list && \
-    set -x &&\
-    apt-get update && \
-    apt-get -y install snmp snmpd snmp-mibs-downloader && \
-    rm -r /var/lib/apt/lists/*
-
 # Configure Supervisord, SSH and base env
 COPY supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
@@ -112,6 +93,25 @@ RUN wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${G
 ADD grafana/provisioning /etc/grafana/provisioning
 ADD grafana/dashboards /var/lib/grafana/dashboards
 COPY grafana/grafana.ini /etc/grafana/grafana.ini
+
+### Install SNMP v2
+FROM telegraf
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+     export DEBIAN_RELEASE=$(awk -F'[" ]' '/VERSION=/{print $3}'  /etc/os-release | tr -cd '[[:alnum:]]._-' ) && \
+     echo "remove main from /etc/apt/sources.list" && \
+     sed -i '/main/d' /etc/apt/sources.list && \
+     echo "remove contrib from /etc/apt/sources.list" && \
+     sed -i '/contrib/d' /etc/apt/sources.list && \
+     echo "remove non-free from /etc/apt/sources.list" && \
+     sed -i '/non-free/d' /etc/apt/sources.list && \
+     echo "deb http://httpredir.debian.org/debian ${DEBIAN_RELEASE} main contrib non-free"  >> /etc/apt/sources.list && \
+     echo "deb http://httpredir.debian.org/debian ${DEBIAN_RELEASE}-updates main contrib non-free"  >> /etc/apt/sources.list && \
+     echo "deb http://security.debian.org ${DEBIAN_RELEASE}/updates main contrib non-free"  >> /etc/apt/sources.list && \
+    set -x &&\
+    apt-get update && \
+    apt-get -y install snmp snmpd snmp-mibs-downloader && \
+    rm -r /var/lib/apt/lists/*
 
 # Cleanup
 RUN apt-get clean && \
