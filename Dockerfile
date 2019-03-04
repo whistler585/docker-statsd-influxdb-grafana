@@ -45,10 +45,7 @@ RUN apt-get -y update && \
  apt-get install -y nodejs
 
 RUN echo "deb http://cz.archive.ubuntu.com/ubuntu xenial main multiverse" >> /etc/apt/sources.list
-RUN apt-get -y update
-RUN apt-get -y install snmp
-RUN apt-get -y install snmp-mib-downloader
-
+RUN apt-get update && apt-get -y install snmp snmp-mib-downloader
 
 # Configure Supervisord, SSH and base env
 COPY supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
