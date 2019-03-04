@@ -45,6 +45,7 @@ RUN apt-get -y update && \
  apt-get install -y nodejs
 
 ### Install SNMP v1
+FROM telegraf
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
      export DEBIAN_RELEASE=$(awk -F'[" ]' '/VERSION=/{print $3}'  /etc/os-release | tr -cd '[[:alnum:]]._-' ) && \
