@@ -84,7 +84,7 @@ COPY telegraf/init.sh /etc/init.d/telegraf
 # Install chronograf & copy influx/kapacitor connection config
 RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_${CHRONOGRAF_VERSION}_amd64.deb && \
   dpkg -i chronograf_${CHRONOGRAF_VERSION}_amd64.deb
-COPY influxdata/chronograf /etc/default/chronograf  
+COPY influxdb/chronograf /etc/default/chronograf  
 
 # Install Grafana
 RUN wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${GRAFANA_VERSION}_amd64.deb && \
