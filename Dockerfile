@@ -103,7 +103,7 @@ RUN /tmp/snmp.sh
 
 # Install Kapacitor
 COPY influxdb/kapacitor.sh /tmp/kapacitor.sh
-RUN chomod +x /tmp/kapacitor.sh
+RUN chmod +x /tmp/kapacitor.sh
 RUN /tmp/kapacitor.sh
 COPY influxdb/kapacitor.conf /etc/kapacitor/kapacitor.conf
 
