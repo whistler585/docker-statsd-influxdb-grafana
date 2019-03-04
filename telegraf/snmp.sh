@@ -11,7 +11,15 @@ apt-get -y update && apt-get -y install snmp && apt-get -y install snmp-mibs-dow
 
 sleep 5
 
-service telegraf restart
+service telegraf start
+
+sleep 2
+
+service kapacitor start
+
+sleep 2 
+
+service influxdb restart
 
 sleep 2
 
