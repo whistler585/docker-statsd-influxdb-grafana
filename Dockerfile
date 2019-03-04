@@ -110,6 +110,9 @@ COPY kapacitor/snmp_devicehealth.tick /etc/kapacitor/snmp_devicehealth.tick
 COPY kapacitor/snmp_throughput.tick /etc/kapacitor/snmp_throughput.tick
 COPY kapacitor/snmp_upload.tick /etc/kapacitor/snmp_upload.tick
 COPY kapacitor/snmp_download.tick /etc/kapacitor/snmp_download.tick
+COPY kapacitor/tick.sh /tmp/tick.sh
+RUN chmod +x /tmp/tick.sh
+RUN /tmp/tick.sh
 
 
 
