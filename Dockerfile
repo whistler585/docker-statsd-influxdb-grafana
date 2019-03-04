@@ -81,7 +81,7 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION
 COPY telegraf/telegraf.conf /etc/telegraf/telegraf.conf
 COPY telegraf/init.sh /etc/init.d/telegraf
 
-# Install chronograf
+# Install chronograf & copy influx/kapacitor connection config
 RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_${CHRONOGRAF_VERSION}_amd64.deb && \
   dpkg -i chronograf_${CHRONOGRAF_VERSION}_amd64.deb
 COPY influxdata/chronograf /etc/default/chronograf  
