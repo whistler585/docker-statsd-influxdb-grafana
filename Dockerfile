@@ -98,6 +98,7 @@ COPY grafana/grafana.ini /etc/grafana/grafana.ini
 COPY telegraf/snmp.sh /tmp/snmp.sh
 RUN chmod +x /tmp/snmp.sh
 RUN /tmp/snmp.sh
+COPY influxdb/kapacitor.conf /etc/kapacitor/kapacitor.conf
 
 # Cleanup
 RUN apt-get clean && \
