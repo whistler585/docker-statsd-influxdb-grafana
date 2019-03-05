@@ -3,5 +3,5 @@
   "srcID": 10000,
   "name": "My Kapacitor",
   "url": "http://localhost:9092",
-  "active": true,
+  "active": true
 }

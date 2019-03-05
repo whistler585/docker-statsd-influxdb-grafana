@@ -7,5 +7,5 @@
   "type": "influx",
   "insecureSkipVerify": false,
   "default": true,
-  "telegraf": "telegraf",
+  "telegraf": "telegraf"
 }

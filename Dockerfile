@@ -111,8 +111,8 @@ COPY kapacitor/snmp_devicehealth.tick /etc/kapacitor/snmp_devicehealth.tick
 COPY kapacitor/snmp_throughput.tick /etc/kapacitor/snmp_throughput.tick
 COPY kapacitor/snmp_upload.tick /etc/kapacitor/snmp_upload.tick
 COPY kapacitor/snmp_download.tick /etc/kapacitor/snmp_download.tick
-COPY influxdb/influxdb.src /usr/share/chronograf/canned/influxdb.src
-COPY kapacitor/kapacitor.kap /usr/share/chronograf/canned/kapacitor.kap
+COPY influxdb/influxdb.src /usr/share/chronograf/resources/influxdb.src
+COPY kapacitor/kapacitor.kap /usr/share/chronograf/resources/kapacitor.kap
 
 # Cleanup
 RUN apt-get clean && \
