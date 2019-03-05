@@ -6,7 +6,7 @@ echo "Starting InfluxDB"
 sleep 10 && /etc/init.d/influxdb start && sleep 20
 
 echo "Starting Chronograf"
-sleep 5 && /usr/bin/chronograf -r --resources-path=/usr/share/chronograf/canned/kapacitor.kap  --resources-path=/usr/share/chronograf/canned/influxdb.src && sleep 10
+sleep 5 && /usr/bin/chronograf -r --resources-path=/usr/share/chronograf/canned/kapacitor.kap  --resources-path=/usr/share/chronograf/canned/influxdb.src
 
 echo "Starting Kapacitor"
 sleep 5 && /etc/init.d/kapacitor start && sleep 5
