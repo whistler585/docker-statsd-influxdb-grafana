@@ -23,4 +23,12 @@ sleep 5 && kapacitor define Throughput -tick /etc/kapacitor/snmp_throughput.tick
 
 echo "TICK tasks loaded"
 
+echo "Stopping Influx & Kapcitor"
+
+echo "Starting Influx - remove from supervisord if solved"
+/etc/init.d/influxdb stop && sleep 5
+
+echo "Starting Kapcitor"
+/etc/init.d/kapacitor stop && sleep 5
+
 exit 0
