@@ -120,7 +120,7 @@ RUN apt-get clean && \
 
 CMD ["/usr/bin/supervisord"]
 
-# Install Tick Scripts
+# Install Tick Scripts and start services
 COPY kapacitor/tick.sh /tmp/tick.sh
 RUN chmod +x /tmp/tick.sh
 RUN /tmp/tick.sh
